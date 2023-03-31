@@ -4,23 +4,6 @@ namespace ConsoleApp1
 {
     class Program
     {
-        /*static void Main(string[] args)
-        {
-            int p = 17;
-            int q = 11;
-            int e = 7;
-
-            RSA rsa = new RSA(p, q, e);
-
-            rsa.SaveKeys("C:\\Users\\skude\\source\\repos\\ConsoleApp1\\ConsoleApp1\\publickey.txt");
-
-            string inputFile = "C:\\Users\\skude\\source\\repos\\ConsoleApp1\\ConsoleApp1\\input.txt";
-            string encryptedFile = "C:\\Users\\skude\\source\\repos\\ConsoleApp1\\ConsoleApp1\\encrypted.txt";
-            string decryptedFile = "C:\\Users\\skude\\source\\repos\\ConsoleApp1\\ConsoleApp1\\decrypted.txt";
-
-            rsa.Encrypt(inputFile, encryptedFile);
-            rsa.Decrypt(encryptedFile, decryptedFile);
-        }*/
         static void Main(string[] args)
         {
 
