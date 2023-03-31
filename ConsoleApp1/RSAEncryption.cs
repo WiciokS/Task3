@@ -6,57 +6,34 @@ public class RSA
     private int p;
     private int q;
     private int n;
-    private int e;
+    public int e { get; set; }
     private int d;
     private int phi;
 
-    public RSA(int p, int q, int e)
+    public RSA(int p, int q)
     {
         this.p = p;
         this.q = q;
         this.n = p * q;
-        this.e = e;
 
         this.phi = (p - 1) * (q - 1);
+        this.e = calculateE(phi);
         this.d = CalculateD(e, phi);
     }
 
     private int CalculateD(int e, int phi)
     {
-        int d = 0;
-        int x1 = 0;
-        int x2 = 1;
-        int y1 = 1;
-        int y2 = 0;
-        int q, r;
-
-        while (phi > 0)
+        var PrivateKey = 1;
+        while (true)
         {
-            q = e / phi;
-            r = e % phi;
+            if (PrivateKey * e % phi == 1)
+            {
+                break;
+            }
 
-            e = phi;
-            phi = r;
-
-            int x = x2 - q * x1;
-            int y = y2 - q * y1;
-
-            x2 = x1;
-            x1 = x;
-            y2 = y1;
-            y1 = y;
+            PrivateKey++;
         }
-
-        if (x2 < 0)
-        {
-            d = x2 + phi;
-        }
-        else
-        {
-            d = x2;
-        }
-
-        return d;
+        return PrivateKey;
     }
 
     public void Encrypt(string inputFile, string outputFile)
@@ -161,5 +138,28 @@ public class RSA
         }
 
         return true;
+    }
+    public static int calculateE(int phi)
+    {
+        for (int e = 2; e < phi; e++)
+        {
+            if (gcd(e, phi) == 1)
+            {
+                return e;
+            }
+        }
+        return -1; // no suitable value of e found
+    }
+
+    // method to calculate greatest common divisor of two numbers
+    private static int gcd(int a, int b)
+    {
+        while (true)
+        {
+            if (b == 0) return a;
+            var a1 = a;
+            a = b;
+            b = a1 % b;
+        }
     }
 }

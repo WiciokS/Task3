@@ -32,10 +32,9 @@ namespace ConsoleApp1
             // Step 1: Input initial data
             int p = 17; // Example value
             int q = 11; // Example value
-            int e = 7; // Example value
 
             // Step 2: Calculate RSA parameters
-            RSA rsa = new RSA(p, q, e); // Example e value
+            RSA rsa = new RSA(p, q); // Example e value
 
             // Step 3: Encrypt plaintext x
             rsa.Encrypt(plaintext, encryptedFile);
@@ -50,7 +49,8 @@ namespace ConsoleApp1
             // Step 6: Decrypt encrypted text using private key
             int[] primes = RSA.FindPrimes(publicKey[0]);
             Console.WriteLine("Primes: " + primes[0] + "," + primes[1]);
-            RSA rsa2 = new RSA(primes[0], primes[1], publicKey[1]);
+            RSA rsa2 = new RSA(primes[0], primes[1]);
+            Console.WriteLine(rsa2.e);
             rsa2.Decrypt(encryptedFile, decryptedFile);
 
             // Print decrypted text to console
